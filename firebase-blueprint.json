@@ -1,0 +1,97 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile document",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "username": { "type": "string" },
+        "email": { "type": "string" },
+        "avatar": { "type": "string" },
+        "phone": { "type": "string" },
+        "country": { "type": "string" },
+        "walletBalance": { "type": "number" },
+        "bonusBalance": { "type": "number" },
+        "lockedBalance": { "type": "number" },
+        "totalEarnings": { "type": "number" },
+        "totalMatches": { "type": "number" },
+        "wins": { "type": "number" },
+        "referralCode": { "type": "string" },
+        "accountStatus": { "type": "string" },
+        "createdDate": { "type": "string" },
+        "role": { "type": "string" }
+      },
+      "required": ["uid", "username", "email", "walletBalance", "bonusBalance", "lockedBalance"]
+    },
+    "Tournament": {
+      "title": "Tournament",
+      "description": "Tournament details",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "gameName": { "type": "string" },
+        "gameMode": { "type": "string" },
+        "matchDate": { "type": "string" },
+        "entryFee": { "type": "number" },
+        "prizePool": { "type": "number" },
+        "maxPlayers": { "type": "number" },
+        "joinedPlayers": { "type": "number" },
+        "status": { "type": "string" },
+        "roomId": { "type": "string" },
+        "roomPassword": { "type": "string" }
+      },
+      "required": ["title", "gameName", "status", "entryFee", "prizePool"]
+    },
+    "WalletRequest": {
+      "title": "WalletRequest",
+      "description": "Deposit or withdrawal request",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "type": { "type": "string" },
+        "amount": { "type": "number" },
+        "status": { "type": "string" },
+        "paymentMethod": { "type": "string" },
+        "transactionId": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["userId", "type", "amount", "status"]
+    },
+    "Transaction": {
+      "title": "Transaction",
+      "description": "Wallet transaction history",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "type": { "type": "string" },
+        "amount": { "type": "number" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["userId", "type", "amount", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/User" },
+      "description": "User profiles"
+    },
+    "/tournaments/{tournamentId}": {
+      "schema": { "$ref": "#/entities/Tournament" },
+      "description": "Tournaments list"
+    },
+    "/wallet_requests/{requestId}": {
+      "schema": { "$ref": "#/entities/WalletRequest" },
+      "description": "Deposit and withdrawal requests"
+    },
+    "/transactions/{transactionId}": {
+      "schema": { "$ref": "#/entities/Transaction" },
+      "description": "Transaction logs"
+    },
+    "/settings/{settingId}": {
+      "schema": { "type": "object" },
+      "description": "App settings"
+    }
+  }
+}
